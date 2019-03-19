@@ -60,25 +60,25 @@ int countSimple(int a, int b){
     	IsSimple = Issimple(num);
 	    if (IsSimple){
 	    	count++;
-	    }
-    }
-    return count;
+		}
+	}
+	return count;
 }
 int main(int argc, char* argv[])
 {
 	if(((argc-1)%2!=0)||(argc==1)){
 		return -1;
 	}
-    int counter = 0;    
-    int beg;  
-    int end;
-    int M = (argc-1)/2; 
-    for(int i = 0;i<M;i++){
-	    beg = atoi(argv[1+2*i]); 
+	int counter = 0;    
+	int beg;  
+	int end;
+	int M = (argc-1)/2; 
+	for(int i = 0;i<M;i++){
+		beg = atoi(argv[1+2*i]); 
     	end = atoi(argv[2+2*i]);
     	counter = countSimple(beg,end);
-	    //std::cout<<"count of simple "<<counter<<std::endl;
-	    std::cout<<counter<<std::endl;
-    }
+		//std::cout<<"count of simple "<<counter<<std::endl;
+		std::cout<<counter<<std::endl;
+	}
     return 0;
 }
