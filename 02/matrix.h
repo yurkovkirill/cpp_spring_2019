@@ -8,91 +8,83 @@ private:
 	class Row
 	{
 	public:
-		Row(int col_tmp = 0) : col_num(col_tmp)
-		{
-			this->row = vector<int>(col_num,0);
-		}
-		const int& operator[](unsigned i) const
+		Row(int col_tmp = 0) : col_num(col_tmp),row(vector<int>(col_num,0))
+		{}
+		const int& operator[](size_t i) const
 		{
 			if (i >= col_num)
 				throw std::out_of_range("i > col_num");
 			return row[i];
 		}
-		int& operator[](unsigned i)
+		int& operator[](size_t i)
 		{
 			if (i >= col_num)
 				throw std::out_of_range("i > col_num");
 			return row[i];
 		}
 
-		unsigned get_col() const
+		size_t get_col() const
 		{
 			return col_num;
 		}
 
 		Row& operator*=(const int num)
 		{
-			for (unsigned i = 0; i < col_num; i++)
-				row[i] *= num;
+			for (auto& i : row)
+				i *= num;
 			return *this;
 		}
 
-		const bool operator==(const Row& co_row) const
+		bool operator==(const Row& co_row) const
 		{
-			for (unsigned i = 0; i < col_num; i++)
+			for (size_t i = 0; i < col_num; i++)
 				if (row[i] != co_row[i])
 					return false;
 			return true;
 		}
 
-		const bool operator!=(const Row& co_row) const
+		bool operator!=(const Row& co_row) const
 		{
-			for (unsigned i = 0; i < col_num; i++)
-				if (row[i] != co_row[i])
-					return true;
-			return false;
+			return !(*this == co_row);
 		}
 		~Row()
-		{
-			row.clear();
-		}
+		{}
 
 	private:
 
-		unsigned col_num;
+		size_t col_num;
 		vector<int> row;
 	};
 
-	unsigned row_num;
-	unsigned col_num;
+	size_t row_num;
+	size_t col_num;
 	vector<Row> M;
 
 public:
-	Matrix(unsigned row_tmp, unsigned col_tmp) : row_num(row_tmp),col_num(col_tmp)
+	Matrix(size_t row_tmp, size_t col_tmp) : row_num(row_tmp),col_num(col_tmp),M(vector<Row>(row_num))
 	{
-		M = std::vector<Row>(row_num);
-		for (unsigned i = 0; i < row_num; i++)
-			M[i] = Row(col_num);
+		for (auto& i : M)
+			i = Row(col_num);
 	}
 
-	unsigned getRows() const
+	size_t getRows() const
 	{
 		return this->row_num;
 	}
 
-	unsigned getColumns() const
+	size_t getColumns() const
 	{
-		return this->M[0].get_col();
+		return this->col_num;
 	}
 
-	const Row& operator[](unsigned i) const
+	const Row& operator[](size_t i) const
 	{
 		if (i >= row_num)
 			throw std::out_of_range("i > row num");
 		return M[i];
 	}
 
-	Row& operator[](unsigned i)
+	Row& operator[](size_t i)
 	{
 		if (i >= row_num)
 			throw std::out_of_range("i > row num");
@@ -101,8 +93,8 @@ public:
 
 	Matrix& operator*=(const int num)
 	{
-		for (unsigned i = 0; i < row_num; i++)
-			M[i] *= num;
+		for (auto& i : M)
+			i *= num;
 		return *this;
 	}
 
@@ -112,7 +104,7 @@ public:
 			return false;
 		if (this->col_num != co_matr.col_num)
 			return false;
-		for (unsigned i = 0; i < row_num; i++)
+		for (size_t i = 0; i < row_num; i++)
 			if (M[i] != co_matr[i])
 				return false;
 		return true;
@@ -120,18 +112,9 @@ public:
 
 	const bool operator!=(const Matrix& co_matr) const
 	{
-		if (this->row_num != co_matr.row_num)
-			return true;
-		if (this->col_num != co_matr.col_num)
-			return true;
-		for (unsigned i = 0; i < row_num; i++)
-			if (M[i] != co_matr[i])
-				return true;
-		return false;
+		return !(*this == co_matr);
 	}
 
 	~Matrix()
-	{
-		M.clear();
-	}
+	{}
 };
