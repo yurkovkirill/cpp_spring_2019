@@ -8,7 +8,7 @@ private:
 	class Row
 	{
 	public:
-		Row(int col_tmp = 0) : col_num(col_tmp),row(vector<int>(col_num,0))
+		Row(int col_tmp = 0) : col_num(col_tmp),row(vector<int>(col_tmp,0))
 		{}
 		const int& operator[](size_t i) const
 		{
@@ -61,7 +61,7 @@ private:
 	vector<Row> M;
 
 public:
-	Matrix(size_t row_tmp, size_t col_tmp) : row_num(row_tmp),col_num(col_tmp),M(vector<Row>(row_num))
+	Matrix(size_t row_tmp, size_t col_tmp) : row_num(row_tmp),col_num(col_tmp),M(vector<Row>(row_tmp))
 	{
 		for (auto& i : M)
 			i = Row(col_num);
