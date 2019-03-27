@@ -98,7 +98,7 @@ public:
 		return *this;
 	}
 
-	const bool operator==(const Matrix& co_matr) const
+	bool operator==(const Matrix& co_matr) const
 	{
 		if (this->row_num != co_matr.row_num)
 			return false;
@@ -110,7 +110,7 @@ public:
 		return true;
 	}
 
-	const bool operator!=(const Matrix& co_matr) const
+	bool operator!=(const Matrix& co_matr) const
 	{
 		return !(*this == co_matr);
 	}
