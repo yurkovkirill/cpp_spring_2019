@@ -61,7 +61,7 @@ private:
 	vector<Row> M;
 
 public:
-	Matrix(size_t row_tmp, size_t col_tmp) : row_num(row_tmp),col_num(col_tmp),M(vector<Row>(row_tmp , Row(col_num)))
+	Matrix(size_t row_tmp, size_t col_tmp) : row_num(row_tmp),col_num(col_tmp),M(vector<Row>(row_tmp , Row(col_tmp)))
 	{}
 
 	size_t getRows() const
