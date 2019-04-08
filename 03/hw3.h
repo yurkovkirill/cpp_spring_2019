@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef HW3_H
+#define HW3_H
 //922337203 6 8 5 4 7 7 5 8 0 7
 //123456789 10111213141516171819
 //100000000 0 0 0 0 0 0 0 0 0 0
@@ -38,19 +38,25 @@ public:
         	number = abs(number);
     	}
         size_t i = 0;
-        if (number != 0)
-        {
-			while(number)
+		if (number != 0)
+		{
+			while (number)
 			{
 				value[i] = (number % base);
 				number /= base;
 				i++;
 			}
-        	size = i;
-        }  
-        for(i = size ; i != quote*qnum; i++)
-                value[i] = 0;
+			size = i;
+		}
+		else
+			value[0] = 0;
+		for (i = size; i != quote*qnum; i++){
+			value[i] = 0;
+			//std::cout << value[i] << ' ';
+		}
+		//std::cout<<std::endl;
 	}
+
 
 	BigInt(const BigInt & copy): size(copy.size), quote(copy.quote), sign(copy.sign), value(new long long[copy.quote*qnum])
 	{
@@ -292,3 +298,5 @@ public:
 
 
 };
+
+#endif
