@@ -38,16 +38,19 @@ private:
     	out_ << (value ? "true" : "false") << Separator;
     	return Error::NoError;
     }
+
     Error process(uint64_t value)
     {
     	out_ << value << Separator;
     	return Error::NoError;
     }
+
     template<class T>
     Error process(T&& value)
     {
     	return Error::CorruptedArchive;
     }
+
     template <class T, class... Args>
     Error process(T&& value , Args&&... args)
     {
@@ -81,7 +84,6 @@ public:
     }
     
 private:
-
    Error loading(bool & value)
     {
     	std::string text;
